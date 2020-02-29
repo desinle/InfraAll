@@ -33,3 +33,8 @@ data "aws_route53_zone" "biohole_zone" {
   name         = var.domains["biohole"]
   private_zone = false
 }
+
+variable "xgd_id" {}
+variable "biohole_id" {}
+variable "machbio_id" {}
+variable "desinle_id" {}
