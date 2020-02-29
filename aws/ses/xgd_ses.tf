@@ -3,7 +3,7 @@ resource "aws_ses_domain_identity" "xgd" {
 }
 
 resource "aws_route53_record" "xgd-domain-identity-records" {
-  zone_id = data.aws_route53_zone.xgd_zone.zone_id
+  zone_id = var.xgd_id
   name    = "_amazonses.${var.domains["xgd"]}"
   type    = "TXT"
   ttl     = "600"
@@ -19,7 +19,7 @@ resource "aws_ses_domain_dkim" "xgd" {
 
 resource "aws_route53_record" "xgd-dkim-records" {
   count   = 3
-  zone_id = data.aws_route53_zone.xgd_zone.zone_id
+  zone_id = var.xgd_id
   name    = "${element(aws_ses_domain_dkim.xgd.dkim_tokens, count.index)}._domainkey.${var.domains["xgd"]}"
   type    = "CNAME"
   ttl     = "600"
@@ -30,7 +30,7 @@ resource "aws_route53_record" "xgd-dkim-records" {
 }
 
 resource "aws_route53_record" "xgd-mx-records" {
-  zone_id = data.aws_route53_zone.xgd_zone.zone_id
+  zone_id = var.xgd_id
   name    = "${var.domains["xgd"]}"
   type    = "MX"
   ttl     = "600"
@@ -42,7 +42,7 @@ resource "aws_route53_record" "xgd-mx-records" {
 }
 
 resource "aws_route53_record" "xgd-spf-records" {
-  zone_id = data.aws_route53_zone.xgd_zone.zone_id
+  zone_id = var.xgd_id
   name    = "${var.domains["xgd"]}"
   type    = "TXT"
   ttl     = "600"
