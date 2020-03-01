@@ -15,6 +15,7 @@ resource "aws_route53_record" "desinle_cert_validation" {
 resource "aws_acm_certificate_validation" "desinle_cert" {
   certificate_arn         = aws_acm_certificate.desinle_certificate.arn
   validation_record_fqdns = ["${aws_route53_record.desinle_cert_validation.fqdn}"]
+  depends_on = [aws_route53_record.desinle_cert_validation]  
 }
 
 #######
@@ -68,6 +69,7 @@ resource "aws_s3_bucket" "www_desinle" {
 
 
 resource "aws_cloudfront_distribution" "desinle_distribution" {
+  depends_on = [aws_acm_certificate_validation.desinle_cert]  
   origin {
     custom_origin_config {
       http_port              = "80"
