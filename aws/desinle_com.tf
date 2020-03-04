@@ -1,20 +1,11 @@
 resource "aws_acm_certificate" "desinle_certificate" {
   domain_name               = var.domains["desinle"]
-  validation_method         = "DNS"
+  validation_method         = "EMAIL"
   subject_alternative_names = ["*.${var.domains["desinle"]}"]
-}
-
-resource "aws_route53_record" "desinle_cert_validation" {
-  name    = aws_acm_certificate.desinle_certificate.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.desinle_certificate.domain_validation_options.0.resource_record_type
-  zone_id = aws_route53_zone.desinle_domain.zone_id
-  records = ["${aws_acm_certificate.desinle_certificate.domain_validation_options.0.resource_record_value}"]
-  ttl     = 60
 }
 
 resource "aws_acm_certificate_validation" "desinle_cert" {
   certificate_arn         = aws_acm_certificate.desinle_certificate.arn
-  validation_record_fqdns = ["${aws_route53_record.desinle_cert_validation.fqdn}"]
 }
 
 #######

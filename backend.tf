@@ -4,7 +4,7 @@ terraform {
     organization = "desinle"
 
     workspaces {
-      name = "everything"
+      name = "InfraAll"
     }
   }
 }
