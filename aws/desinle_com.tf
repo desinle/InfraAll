@@ -13,7 +13,7 @@ resource "aws_route53_record" "desinle_cert_validation" {
 }
 
 output "desinle_fqdn" {
-  default = aws_route53_record.desinle_cert_validation.fqdn
+  value = aws_route53_record.desinle_cert_validation.fqdn
 }
 
 # resource "aws_acm_certificate_validation" "desinle_cert" {

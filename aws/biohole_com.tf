@@ -13,7 +13,7 @@ resource "aws_route53_record" "biohole_cert_validation" {
 }
 
 output "biohole_fqdn" {
-  default = aws_route53_record.biohole_cert_validation.fqdn
+  value = aws_route53_record.biohole_cert_validation.fqdn
 }
 
 # resource "aws_acm_certificate_validation" "biohole_cert" {

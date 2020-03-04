@@ -13,7 +13,7 @@ resource "aws_route53_record" "machbio_cert_validation" {
 }
 
 output "machbio_fqdn" {
-  default = aws_route53_record.machbio_cert_validation.fqdn
+  value = aws_route53_record.machbio_cert_validation.fqdn
 }
 
 # resource "aws_acm_certificate_validation" "machbio_cert" {
