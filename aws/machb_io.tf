@@ -2,7 +2,6 @@ resource "aws_acm_certificate" "machbio_certificate" {
   domain_name               = var.domains["machbio"]
   validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domains["machbio"]}"]
-  depends_on = [aws_route53_record.machbio_domain]  
 }
 
 resource "aws_route53_record" "machbio_cert_validation" {

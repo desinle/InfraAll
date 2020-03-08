@@ -2,7 +2,6 @@ resource "aws_acm_certificate" "desinle_certificate" {
   domain_name               = var.domains["desinle"]
   validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domains["desinle"]}"]
-  depends_on = [aws_route53_record.desinle_domain]    
 }
 
 resource "aws_route53_record" "desinle_cert_validation" {
