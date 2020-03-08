@@ -114,7 +114,7 @@ resource "aws_cloudfront_distribution" "machbio_distribution" {
 }
 
 resource "aws_route53_record" "www_machbio" {
-  zone_id = "${aws_route53_zone.desinle_domain.zone_id}"
+  zone_id = "${aws_route53_zone.machbio_domain.zone_id}"
   name    = "${var.www_domains["machbio"]}"
   type    = "A"
 
@@ -126,7 +126,7 @@ resource "aws_route53_record" "www_machbio" {
 }
 
 resource "aws_route53_record" "root_machbio" {
-  zone_id = "${aws_route53_zone.desinle_domain.zone_id}"
+  zone_id = "${aws_route53_zone.machbio_domain.zone_id}"
 
   name = ""
   type = "A"
