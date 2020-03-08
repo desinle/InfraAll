@@ -2,6 +2,7 @@ resource "aws_acm_certificate" "xgd_certificate" {
   domain_name               = var.domains["xgd"]
   validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domains["xgd"]}"]
+  depends_on = [aws_route53_record.xgd_domain]    
 }
 
 resource "aws_route53_record" "xgd_cert_validation" {

@@ -2,12 +2,13 @@ resource "aws_acm_certificate" "machbio_certificate" {
   domain_name               = var.domains["machbio"]
   validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domains["machbio"]}"]
+  depends_on = [aws_route53_record.machbio_domain]  
 }
 
 resource "aws_route53_record" "machbio_cert_validation" {
   name    = aws_acm_certificate.machbio_certificate.domain_validation_options.0.resource_record_name
   type    = aws_acm_certificate.machbio_certificate.domain_validation_options.0.resource_record_type
-  zone_id = aws_route53_zone.desinle_domain.zone_id
+  zone_id = aws_route53_zone.machbio_domain.zone_id
   records = ["${aws_acm_certificate.machbio_certificate.domain_validation_options.0.resource_record_value}"]
   ttl     = 60
 }

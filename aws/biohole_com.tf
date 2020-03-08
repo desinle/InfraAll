@@ -2,6 +2,7 @@ resource "aws_acm_certificate" "biohole_certificate" {
   domain_name               = var.domains["biohole"]
   validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domains["biohole"]}"]
+  depends_on = [aws_route53_record.biohole_domain]
 }
 
 resource "aws_route53_record" "biohole_cert_validation" {
