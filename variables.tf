@@ -20,3 +20,5 @@ variable "www_domains" {
     "biohole" = "www.biohole.com"
   }
 }
+
+variable "rancher_server_admin_password" {}
