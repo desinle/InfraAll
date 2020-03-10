@@ -31,3 +31,7 @@ override.tf.json
 
 ### Ignore Archive Files
 *.zip
+
+
+### kube_config
+kube_config*
