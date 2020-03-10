@@ -20,3 +20,41 @@ provider "kubernetes" {
     digitalocean_kubernetes_cluster.k8s.kube_config[0].cluster_ca_certificate
   )
 }
+
+provider "helm" {
+  kubernetes {
+    load_config_file = false
+    host  = digitalocean_kubernetes_cluster.k8s.endpoint
+    token = digitalocean_kubernetes_cluster.k8s.kube_config[0].token
+    cluster_ca_certificate = base64decode(
+      digitalocean_kubernetes_cluster.k8s.kube_config[0].cluster_ca_certificate
+      )
+  }
+}
+
+data "helm_repository" "stable" {
+  name = "stable"
+  url  = "https://kubernetes-charts.storage.googleapis.com"
+}
+
+resource "helm_release" "nginx-ingress" {
+  name       = "nginx-ingress"
+  repository = data.helm_repository.stable.metadata[0].name
+  chart      = "nginx-ingress"
+  version    = "1.30.0"
+
+  set {
+    name  = "rbac.create"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.autoscaling.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.service.loadBalancerIP"
+    value = "true"
+  }
+}
