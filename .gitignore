@@ -35,3 +35,6 @@ override.tf.json
 
 ### kube_config
 kube_config*
+
+### ini secrets
+*.ini
